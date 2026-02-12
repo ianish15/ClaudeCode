@@ -283,7 +283,8 @@ img {
 .species-card {
   background: var(--color-white);
   border-radius: 8px;
-  padding: 2rem 1.5rem;
+  padding: 0;
+  overflow: hidden;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   transition: transform var(--transition), box-shadow var(--transition);
 }
@@ -293,9 +294,10 @@ img {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
-.species-icon {
-  font-size: 2rem;
-  margin-bottom: 0.75rem;
+.species-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
 }
 
 .species-card h3 {
@@ -303,6 +305,7 @@ img {
   font-size: 1.2rem;
   color: var(--color-primary-dark);
   margin-bottom: 0.25rem;
+  padding: 1.25rem 1.5rem 0;
 }
 
 .species-latin {
@@ -310,12 +313,14 @@ img {
   font-size: 0.9rem;
   color: var(--color-text-light);
   margin-bottom: 0.75rem;
+  padding: 0 1.5rem;
 }
 
 .species-card p:last-child {
   font-size: 0.95rem;
   color: var(--color-text-light);
   line-height: 1.6;
+  padding: 0 1.5rem 1.5rem;
 }
 
 /* ===== Facts Section ===== */
