@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Flappy Hummingbird</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-wrapper">
+    <canvas id="game-canvas"></canvas>
+
+    <div id="screen-start" class="overlay">
+      <h1>Flappy Hummingbird</h1>
+      <p>Tap or press Space to flap your wings and dodge the obstacles!</p>
+      <button id="btn-start" class="game-btn">Start Game</button>
+      <a href="../index.html" class="back-link">Back to Hummingbirds</a>
+    </div>
+
+    <div id="screen-gameover" class="overlay hidden">
+      <h2>Game Over</h2>
+      <p id="final-score">Score: 0</p>
+      <p id="high-score">Best: 0</p>
+      <button id="btn-restart" class="game-btn">Play Again</button>
+      <a href="../index.html" class="back-link">Back to Hummingbirds</a>
+    </div>
+
+    <div id="score-display" class="hidden">0</div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
