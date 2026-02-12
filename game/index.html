@@ -12,7 +12,17 @@
 
     <div id="screen-start" class="overlay">
       <h1>Flappy Hummingbird</h1>
-      <p>Tap or press Space to flap your wings and dodge the obstacles!</p>
+      <p>Choose your character, then tap or press Space to flap!</p>
+      <div id="character-select">
+        <button class="char-btn selected" data-char="hummingbird">
+          <div class="char-preview char-preview-bird"></div>
+          <span>Hummingbird</span>
+        </button>
+        <button class="char-btn" data-char="ryan">
+          <div class="char-preview char-preview-ryan"></div>
+          <span>Ryan</span>
+        </button>
+      </div>
       <button id="btn-start" class="game-btn">Start Game</button>
       <a href="../index.html" class="back-link">Back to Hummingbirds</a>
     </div>

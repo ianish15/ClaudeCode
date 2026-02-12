@@ -14,6 +14,24 @@ const highScoreEl = document.getElementById('high-score');
 document.getElementById('btn-start').addEventListener('click', startGame);
 document.getElementById('btn-restart').addEventListener('click', startGame);
 
+// Character selection
+let selectedCharacter = 'hummingbird';
+const charBtns = document.querySelectorAll('.char-btn');
+charBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    charBtns.forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedCharacter = btn.dataset.char;
+  });
+});
+
+// Ryan image (loaded if available, falls back to canvas drawing)
+let ryanImg = null;
+let ryanImgLoaded = false;
+const ryanImage = new Image();
+ryanImage.onload = () => { ryanImg = ryanImage; ryanImgLoaded = true; };
+ryanImage.src = 'ryan.png';
+
 // ===== Constants =====
 const GRAVITY = 0.45;
 const FLAP_FORCE = -7.5;
@@ -106,6 +124,14 @@ function updateBird() {
 }
 
 function drawBird() {
+  if (selectedCharacter === 'ryan') {
+    drawRyan();
+  } else {
+    drawHummingbird();
+  }
+}
+
+function drawHummingbird() {
   ctx.save();
   ctx.translate(bird.x, bird.y);
   ctx.rotate(bird.rotation);
@@ -168,6 +194,89 @@ function drawBird() {
   ctx.fillStyle = COLORS.birdWing;
   ctx.fill();
 
+  ctx.restore();
+}
+
+function drawRyan() {
+  ctx.save();
+  ctx.translate(bird.x, bird.y);
+  ctx.rotate(bird.rotation);
+
+  const radius = 18;
+
+  if (ryanImgLoaded) {
+    // Draw Ryan's photo in a circle
+    ctx.beginPath();
+    ctx.arc(0, 0, radius, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.clip();
+    ctx.drawImage(ryanImg, -radius, -radius, radius * 2, radius * 2);
+    ctx.restore();
+
+    // Border around the circle (separate save/restore since we clipped above)
+    ctx.save();
+    ctx.translate(bird.x, bird.y);
+    ctx.rotate(bird.rotation);
+    ctx.beginPath();
+    ctx.arc(0, 0, radius, 0, Math.PI * 2);
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+    ctx.restore();
+  } else {
+    // Fallback: draw a cartoon Ryan
+    // Head
+    ctx.beginPath();
+    ctx.arc(0, 0, radius, 0, Math.PI * 2);
+    ctx.fillStyle = '#ffd699';
+    ctx.fill();
+    ctx.strokeStyle = '#d4a054';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Hair
+    ctx.beginPath();
+    ctx.ellipse(0, -radius + 4, radius - 2, 8, 0, Math.PI, Math.PI * 2);
+    ctx.fillStyle = '#6b4226';
+    ctx.fill();
+
+    // Eyes
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.ellipse(-6, -3, 4, 4.5, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(6, -3, 4, 4.5, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#3b2f2f';
+    ctx.beginPath();
+    ctx.arc(-5, -2.5, 2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(7, -2.5, 2, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Smile
+    ctx.beginPath();
+    ctx.arc(0, 3, 7, 0.15, Math.PI - 0.15);
+    ctx.strokeStyle = '#8b5e3c';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    ctx.restore();
+  }
+
+  // Cape / flapping effect (drawn in both modes)
+  ctx.save();
+  ctx.translate(bird.x, bird.y);
+  ctx.rotate(bird.rotation);
+  const capeWave = bird.wingAngle * 5;
+  ctx.beginPath();
+  ctx.moveTo(-radius + 2, -4);
+  ctx.quadraticCurveTo(-radius - 14, -2 + capeWave, -radius - 8, 8 + capeWave);
+  ctx.quadraticCurveTo(-radius - 4, 6, -radius + 2, 4);
+  ctx.fillStyle = '#e05d44';
+  ctx.fill();
   ctx.restore();
 }
 
