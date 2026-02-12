@@ -16,6 +16,7 @@
         <li><a href="#facts">Facts</a></li>
         <li><a href="#habitat">Habitat</a></li>
         <li><a href="#conservation">Conservation</a></li>
+        <li><a href="#quiz">Quiz</a></li>
         <li><a href="game/index.html" class="nav-game-link">Play Game</a></li>
       </ul>
       <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
@@ -289,6 +290,33 @@
         </div>
       </div>
     </section>
+    <!-- Quiz Section -->
+    <section id="quiz" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">Which Hummingbird Are You?</h2>
+        <p class="quiz-intro">Answer five quick questions to discover your hummingbird alter ego.</p>
+
+        <div class="quiz-container">
+          <div class="quiz-progress">
+            <div class="quiz-progress-bar" id="quizProgressBar"></div>
+          </div>
+          <div class="quiz-progress-text"><span id="quizStep">1</span> / 5</div>
+
+          <div id="quizContent">
+            <!-- Questions rendered by JS -->
+          </div>
+
+          <div id="quizResult" class="quiz-result" style="display:none;">
+            <img id="resultImg" class="quiz-result-img" src="" alt="">
+            <h3 id="resultName"></h3>
+            <p id="resultLatin" class="species-latin"></p>
+            <p id="resultDesc"></p>
+            <button class="btn quiz-restart" id="quizRestart">Take It Again</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer class="footer">
